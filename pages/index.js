@@ -1,10 +1,12 @@
 import styled from 'styled-components';
+import Head from 'next/head';
+
 import db from '../db.json';
-import Widget from '../src/components/Widget'
-import QuizLogo from '../src/components/QuizLogo'
-import QuizBackground from '../src/components/QuizBackground'
-import Footer from '../src/components/Footer'
-import GitHubCorner from '../src/components/GitHubCorner'
+import Widget from '../src/components/Widget';
+import QuizLogo from '../src/components/QuizLogo';
+import QuizBackground from '../src/components/QuizBackground';
+import Footer from '../src/components/Footer';
+import GitHubCorner from '../src/components/GitHubCorner';
 
 export const QuizContainer = styled.div`
   width: 100%;
@@ -23,17 +25,23 @@ export const Bloco = styled.div`
 
   align-items: center;
   justify-content: center;
-`
+`;
 
 export const Title = styled.div`
   font-size: 30px;
   font-weight: bold;
   color: black;
-`
+`;
 
 export default function Home() {
   return (
     <QuizBackground backgroundImage={db.bg}>
+      <Head>
+        <title>
+          Quiz
+        </title>
+      </Head>
+
       <QuizContainer>
 
         <QuizLogo />
@@ -59,7 +67,7 @@ export default function Home() {
 
       </QuizContainer>
 
-      <GitHubCorner projectUrl="https://github.com/omariosouto" /> 
+      <GitHubCorner projectUrl="https://github.com/omariosouto" />
     </QuizBackground>
-  )
+  );
 }
