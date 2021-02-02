@@ -11,17 +11,7 @@ import Footer from '../src/components/Footer';
 import GitHubCorner from '../src/components/GitHubCorner';
 import Input from '../src/components/Input';
 import Button from '../src/components/Button';
-
-export const QuizContainer = styled.div`
-  width: 100%;
-  max-width: 350px;
-  padding-top: 45px;
-  margin: auto 10%;
-  @media screen and (max-width: 500px) {
-    margin: auto;
-    padding: 15px;
-  }
-`;
+import QuizContainer from '../src/components/QuizContainer';
 
 export const Bloco = styled.div`
   display: flex;
@@ -76,8 +66,7 @@ export default function Home() {
               />
 
               <Button type="submit" disabled={name.length === 0}>
-                Jogar
-                {name}
+                {`Jogar ${name}`}
               </Button>
             </form>
           </Widget.Content>
