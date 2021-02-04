@@ -129,8 +129,6 @@ export default function Quiz() {
         )}
         { screenState === screenStates.LOADING && <LoadingWidget />}
 
-        { screenState === screenStates.RESULT && <div>Acertou!!</div>}
-
       </QuizContainer>
     </QuizBackground>
   );

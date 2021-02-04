@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '../Button';
 import Widget from '../Widget';
 
 const QuestionWidget = ({
   question, totalQuestions, questionIndex, onSubmit,
 }) => {
+  const [selectedAlternative, setSelectedAlternative] = useState(undefined);
+  const [isQuestionSubmitted, setIsQuestionSubmitted] = useState(false);
   const questionId = `question__${questionIndex}`;
+  const isCorrect = selectedAlternative === question.answer;
+  const hasAlternativeSelected = selectedAlternative !== undefined;
 
   const handlerSubmit = (eventInfos) => {
     eventInfos.preventDefault();
-    onSubmit();
+    setIsQuestionSubmitted(true);
+
+    setTimeout(() => {
+      onSubmit();
+      setIsQuestionSubmitted(false);
+      setSelectedAlternative(undefined);
+    }, 500);
   };
 
   return (
@@ -45,12 +55,14 @@ const QuestionWidget = ({
             return (
               <Widget.Topic
                 as="label"
+                key={alternativeId}
                 htmlFor={alternativeId}
               >
                 <input
                   style={{ display: 'none' }}
                   id={alternativeId}
                   name={questionId}
+                  onChange={() => setSelectedAlternative(alternativeIndex)}
                   type="radio"
                 />
                 {alternative}
@@ -62,9 +74,11 @@ const QuestionWidget = ({
               {JSON.stringify(question.alternatives, null, 4)}
             </pre> */}
 
-          <Button type="submit">
+          <Button type="submit" disabled={!hasAlternativeSelected}>
             Confirmar
           </Button>
+          {isQuestionSubmitted && isCorrect && <p>Você acertou!</p>}
+          {isQuestionSubmitted && !isCorrect && <p>Você errou!</p>}
         </form>
       </Widget.Content>
     </Widget>
